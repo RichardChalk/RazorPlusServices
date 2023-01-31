@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RazorPlusServices.Models;
+using RazorPlusServices.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddRazorPages();
 // Lägg till min DbContext
 builder.Services.AddDbContext<NorthwindContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Lägg till min SupplierService
+builder.Services.AddTransient<ISupplierService, SupplierService>();
 
 var app = builder.Build();
 
